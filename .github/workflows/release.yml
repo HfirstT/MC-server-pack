@@ -1,0 +1,50 @@
+name: 리소스팩 릴리스
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # 검사가 실패하면 여기서 멈추고 릴리스를 만들지 않는다.
+      - name: 리소스팩 파일 검사
+        run: python3 tools/validate.py
+
+      - name: zip 만들기
+        id: pack
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          ZIP="hanolter-pack-${TAG}.zip"
+          zip -r -X -9 "$ZIP" pack.mcmeta assets
+          SHA1="$(sha1sum "$ZIP" | cut -d' ' -f1)"
+          echo "zip=$ZIP" >> "$GITHUB_OUTPUT"
+          echo "sha1=$SHA1" >> "$GITHUB_OUTPUT"
+
+      - name: 릴리스 올리기
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+          ZIP: ${{ steps.pack.outputs.zip }}
+          SHA1: ${{ steps.pack.outputs.sha1 }}
+        run: |
+          URL="https://github.com/${GITHUB_REPOSITORY}/releases/download/${TAG}/${ZIP}"
+          {
+            echo "## server.properties 에 넣을 값"
+            echo
+            echo '```properties'
+            echo "resource-pack=${URL}"
+            echo "resource-pack-sha1=${SHA1}"
+            echo '```'
+            echo
+            echo "- zip 직접 다운로드 주소: ${URL}"
+            echo "- SHA-1: \`${SHA1}\`"
+          } > notes.md
+          gh release create "$TAG" "$ZIP" --title "$TAG" --notes-file notes.md --verify-tag

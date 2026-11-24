@@ -1,0 +1,19 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "cases": [
+      {
+        "when": "hanolter:steel_core",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/steel_core"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/netherite_scrap"
+    }
+  }
+}
