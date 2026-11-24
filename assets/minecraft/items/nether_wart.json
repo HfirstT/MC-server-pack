@@ -1,0 +1,19 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "cases": [
+      {
+        "when": "hanolter:red_vein",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/red_vein"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/nether_wart"
+    }
+  }
+}

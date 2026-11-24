@@ -1,0 +1,19 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "cases": [
+      {
+        "when": "hanolter:azure_crystal",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/azure_crystal"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/prismarine_crystals"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "cases": [
+      {
+        "when": "hanolter:gold_grain",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/gold_grain"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/gold_nugget"
+    }
+  }
+}
