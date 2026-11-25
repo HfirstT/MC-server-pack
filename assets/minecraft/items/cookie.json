@@ -1,0 +1,19 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "cases": [
+      {
+        "when": "hanolter:meal_explorer_lunchbox",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/meal_explorer_lunchbox"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/cookie"
+    }
+  }
+}

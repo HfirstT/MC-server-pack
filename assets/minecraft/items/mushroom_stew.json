@@ -1,0 +1,26 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "cases": [
+      {
+        "when": "hanolter:meal_fish_soup",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/meal_fish_soup"
+        }
+      },
+      {
+        "when": "hanolter:mystery_porridge",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/mystery_porridge"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/mushroom_stew"
+    }
+  }
+}

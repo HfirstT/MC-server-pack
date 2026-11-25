@@ -1,0 +1,26 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "cases": [
+      {
+        "when": "hanolter:meal_sea_bream_feast",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/meal_sea_bream_feast"
+        }
+      },
+      {
+        "when": "hanolter:meal_special_fisher",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/meal_special_fisher"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/cooked_salmon"
+    }
+  }
+}

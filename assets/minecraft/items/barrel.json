@@ -1,0 +1,19 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "cases": [
+      {
+        "when": "hanolter:aging_jar",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/aging_jar"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:block/barrel"
+    }
+  }
+}

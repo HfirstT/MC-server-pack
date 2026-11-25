@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "hanolter:item/meal_sea_bream_feast"
+  }
+}

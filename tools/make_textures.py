@@ -827,6 +827,365 @@ ART = {
     ),
 }
 
+# ---- 요리·대장장이·공통 아이템 (이슈 MC-server#221) ----
+# 여러 그림이 같이 쓰는 격자: 색만 바꾸거나(도시락·특별 음식), 표지 책 바탕에 무늬를 찍는다(stamp).
+
+
+def faded(palette, amount=0.55):
+    """비상 음식용: 같은 그림의 흐린 판 — 색을 회색 쪽으로 섞는다."""
+    out = {}
+    for key, color in palette.items():
+        r, g, b = (int(color[i:i + 2], 16) for i in (1, 3, 5))
+        gray = (r * 3 + g * 6 + b) // 10
+        mix = [round(c + (gray + 40 - c) * amount) for c in (r, g, b)]
+        out[key] = "#" + "".join(f"{max(0, min(255, c)):02x}" for c in mix)
+    return out
+
+
+def stamp(base, marks):
+    """바탕 격자에 (x, y, 줄 목록) 무늬를 찍는다. 무늬의 '.' 은 바탕을 그대로 둔다."""
+    rows = [list(r) for r in base]
+    for x, y, lines in marks:
+        for dy, line in enumerate(lines):
+            for dx, ch in enumerate(line):
+                if ch != ".":
+                    rows[y + dy][x + dx] = ch
+    return ["".join(r) for r in rows]
+
+
+LUNCHBOX = [
+    "................",
+    "................",
+    ".OOOOOOOOOOOOOO.",
+    ".OBBBBBBBBBBBBO.",
+    ".OBRRRRRBAAAABO.",
+    ".OBRRGRRBAACABO.",
+    ".OBRRRRRBACAABO.",
+    ".OBRGRRRBAAAABO.",
+    ".OBBBBBBBBBBBBO.",
+    ".OBCCCCBGGGGGBO.",
+    ".OBCACCBGAGGGBO.",
+    ".OBCCCCBGGGAGBO.",
+    ".OBBBBBBBBBBBBO.",
+    ".ObbbbbbbbbbbbO.",
+    ".OOOOOOOOOOOOOO.",
+    "................",
+]
+HARVEST_BOX = {"O": "#3a2412", "B": "#b5834a", "b": "#8a5f30", "R": "#f4f0e0", "A": "#f08a2a",
+               "C": "#e6c35a", "G": "#5fae3a"}
+
+FISH_SOUP_PALETTE = {"O": "#2a1e16", "B": "#5a4636", "D": "#3e2f24", "W": "#8a705a", "S": "#efe6cf",
+                     "G": "#58b04a", "R": "#d8402c", "F": "#7aa6c8", "H": "#e8eef2"}
+FISH_SOUP = [
+    "......H...H.....",
+    ".....H...H......",
+    "......H...H.....",
+    "..........FF....",
+    "..OOOOOOOFFOOO..",
+    ".OWWWWWWFFWWWWO.",
+    ".OWSSGSSFSSRSWO.",
+    ".OWSRSSSSSGSSWO.",
+    "..OWSSGSSRSSWO..",
+    "..OBWWWWWWWWBO..",
+    "...OBBBBBBBBO...",
+    "...OBDBBBBDBO...",
+    "....OBBBBBBO....",
+    ".....OOOOOO.....",
+    "................",
+    "................",
+]
+
+RICEBALL_PALETTE = {"O": "#3a3428", "W": "#f7f4ea", "S": "#d6d0bf", "N": "#1f2a24", "K": "#2b2b2b"}
+RICEBALL = [
+    "................",
+    "................",
+    ".......OO.......",
+    "......OWWO......",
+    ".....OWWWWO.....",
+    ".....OWWWWO.....",
+    "....OWWWKWWO....",
+    "....OWWWWWWO....",
+    "...OWWKWWWWWO...",
+    "...OWWNNNNWWO...",
+    "..OWWWNNNNWWWO..",
+    "..OWWWNNNNWWSO..",
+    "..OSWWNNNNWSSO..",
+    "...OOOOOOOOOO...",
+    "................",
+    "................",
+]
+
+# 특별 음식: 종류(농부·어부·광부·탐험가)마다 덮개 색만 다르다. 등급은 아이템 이름 색으로 구분한다.
+SPECIAL_DISH = [
+    "................",
+    ".......YY.......",
+    "......OYYO......",
+    "....OOOOOOOO....",
+    "...OCCCCCCCCO...",
+    "..OCCLCCCCCCCO..",
+    "..OCLCCCSCCCCO..",
+    ".OCCLCCSSSCCCCO.",
+    ".OCCCCCCSCCCCCO.",
+    ".OCCCCCCCCCCCCO.",
+    "OOOOOOOOOOOOOOOO",
+    "OYYYYYYYYYYYYYYO",
+    ".OYYDDDDDDDDYYO.",
+    "..OOOOOOOOOOOO..",
+    "................",
+    "................",
+]
+
+
+def special_dish(cover, light):
+    return ({"O": "#2a1e0a", "Y": "#f2c12e", "D": "#b8860b", "S": "#ffffff", "C": cover, "L": light},
+            SPECIAL_DISH)
+
+
+# 표지 책 바탕. 표지 한가운데(5,4)에 5x5 무늬를 찍는다.
+BOOK = [
+    "................",
+    "..OOOOOOOOOOO...",
+    ".OCCCCCCCCCCPO..",
+    ".OCLCCCCCCCCPO..",
+    ".OCLCCCCCCCCPO..",
+    ".OCLCCCCCCCCPO..",
+    ".OCLCCCCCCCCPO..",
+    ".OCLCCCCCCCCPO..",
+    ".OCLCCCCCCCCPO..",
+    ".OCLCCCCCCCCPO..",
+    ".OCDDDDDDDDDPO..",
+    ".OCCCCCCCCCCPO..",
+    ".OPPPPPPPPPPPO..",
+    "..OOOOOOOOOOO...",
+    "................",
+    "................",
+]
+MARK_PICKAXE = ["MMMM.", "...MM", "..S.M", ".S..M", "S...."]
+MARK_HOOK = ["...S.", "...S.", "M..S.", "M..S.", ".MM.."]
+MARK_CROSS = ["..M..", "..M..", "MMMMM", "..M..", "..M.."]
+MARK_CROWN = ["M.M.M", "M.M.M", "MMMMM", "MMMMM", "....."]
+# 낡은 책: 바랜 색 + 얼룩(T) + 찢어진 귀퉁이. 대장장이 책: 선명한 색 + 금 모서리 장식(G).
+WORN_SPOTS = [(9, 3, ["T"]), (4, 9, ["TT"]), (10, 8, ["T"]), (11, 1, ["..", "T."]), (12, 2, ["."])]
+SMITH_STUDS = [(2, 2, ["G"]), (11, 2, ["G"]), (2, 11, ["G"]), (11, 11, ["G"])]
+WORN_BOOK = {"O": "#2e2418", "C": "#8a7458", "L": "#a08a6c", "D": "#5e4e3a", "P": "#cfc3a0",
+             "M": "#4a3e2e", "S": "#4a3e2e", "T": "#6a583f"}
+
+
+def smith_book(cover, light, dark):
+    return {"O": "#10162e", "C": cover, "L": light, "D": dark, "P": "#f2ead2", "M": "#ffd94a",
+            "S": "#c9a36a", "G": "#ffd94a"}
+
+
+ART.update({
+    # ---- 요리 8종 ----
+    "meal_harvest_box": (HARVEST_BOX, LUNCHBOX),
+    "meal_fish_soup": (FISH_SOUP_PALETTE, FISH_SOUP),
+    "meal_miner_rice": (RICEBALL_PALETTE, RICEBALL),
+    "meal_pumpkin_stew": (
+        {"O": "#3a2a1a", "B": "#c9c2b5", "W": "#f2ede2", "S": "#e58a1f", "P": "#ffb347", "C": "#b8601a",
+         "G": "#6fae3c", "L": "#a8763a"},
+        [
+            "................",
+            "............OO..",
+            "...........OLO..",
+            "..........OLO...",
+            "..OOOOOOOOLOOO..",
+            ".OWWWWWWWLWWWWO.",
+            ".OWSSPPSSSSCSWO.",
+            ".OWSPPSSGSSSSWO.",
+            "..OWSSSCSSPSWO..",
+            "..OBWWWWWWWWBO..",
+            "...OBBBBBBBBO...",
+            "...OBBBBBBBBO...",
+            "....OBBBBBBO....",
+            ".....OOOOOO.....",
+            "................",
+            "................",
+        ],
+    ),
+    "meal_sea_bream_feast": (
+        {"O": "#3a2a22", "R": "#e0503a", "P": "#f08a70", "D": "#a8301f", "E": "#1a1a1a", "W": "#f2f2f2",
+         "L": "#d6e06a", "Y": "#fff27a"},
+        [
+            "................",
+            "................",
+            "................",
+            "....OOOOO.......",
+            "...ORRRRROO..O..",
+            "..ORPRRRRRROORO.",
+            ".OREPRRDRRRRRRO.",
+            ".ORRPRRRRDRRRO..",
+            "..ORRRRDRRRORO..",
+            "...OOORRRROO.O..",
+            ".OOOOOOOOOOOOOO.",
+            "OWWWWWWLLWWWWWWO",
+            ".OWWWWLYYLWWWWO.",
+            "..OOOOOOOOOOOO..",
+            "................",
+            "................",
+        ],
+    ),
+    "meal_explorer_lunchbox": (
+        {"O": "#16261c", "B": "#4f7a5a", "b": "#365a40", "R": "#d9b98a", "A": "#9a6a3a", "C": "#d6452a",
+         "G": "#a8c04a"},
+        LUNCHBOX,
+    ),
+    "meal_honey_pork_stew": (
+        {"O": "#141418", "K": "#3a3a40", "D": "#25252a", "M": "#9a4a2a", "Y": "#f5b921", "G": "#6fae3c",
+         "H": "#e8eef2"},
+        [
+            "....H....H......",
+            ".....H....H.....",
+            "....H....H......",
+            "................",
+            "..OOOOOOOOOOOO..",
+            ".OKMMYMMMYMMGKO.",
+            "OOKMYYMMYYMMMKOO",
+            "OKKKKKKKKKKKKKKO",
+            ".OKKKKKKKKKKKKO.",
+            ".OKDKKKKKKKKDKO.",
+            "..OKKKKKKKKKKO..",
+            "...OOOOOOOOOO...",
+            "................",
+            "................",
+            "................",
+            "................",
+        ],
+    ),
+    "meal_spice_grilled_fish": (
+        {"O": "#3a2412", "B": "#c9772e", "S": "#d8341f", "T": "#c9a36a", "E": "#1a1a1a"},
+        [
+            "................",
+            ".............OO.",
+            "............OTO.",
+            "..........OOTO..",
+            "........OOBBO...",
+            "......OOBSBBO...",
+            ".....OBBBBSBO...",
+            "....OBSBBBBO....",
+            "...OBBBBSBO.....",
+            "..OEBBSBBO......",
+            "..OBBBBOO.......",
+            ".OTOBOO.........",
+            "OTO.OO..........",
+            "OO..............",
+            "................",
+            "................",
+        ],
+    ),
+    # ---- 특별 음식 4종 (종류별 1장) ----
+    "meal_special_farmer": special_dish("#5fae3a", "#a8e07a"),
+    "meal_special_fisher": special_dish("#3f8fd6", "#9fd0ff"),
+    "meal_special_miner": special_dish("#7a7f92", "#c5c9d6"),
+    "meal_special_explorer": special_dish("#c9772e", "#f0b070"),
+    # ---- 비상 음식 3종 (같은 요리 그림의 흐린 판) ----
+    "meal_emergency_harvest_box": (faded(HARVEST_BOX), LUNCHBOX),
+    "meal_emergency_fish_soup": (faded(FISH_SOUP_PALETTE), FISH_SOUP),
+    "meal_emergency_miner_rice": (faded(RICEBALL_PALETTE), RICEBALL),
+    # ---- 정체불명의 죽·요리사 도구 ----
+    "mystery_porridge": (
+        {"O": "#2a1e16", "B": "#6a5240", "W": "#9a7e64", "S": "#7a6a8a", "U": "#a892c0", "E": "#3a2e44",
+         "G": "#9ad06a"},
+        [
+            "................",
+            "................",
+            ".....G..........",
+            "..........G.....",
+            "..OOOOOOOOOOOO..",
+            ".OWWWWWWWWWWWWO.",
+            ".OWSSSUSSSSSSWO.",
+            ".OWSUSSSSEESSWO.",
+            "..OWSSSUSSSSWO..",
+            "..OBWWWWWWWWBO..",
+            "...OBBBBBBBBO...",
+            "...OBBBBBBBBO...",
+            "....OBBBBBBO....",
+            ".....OOOOOO.....",
+            "................",
+            "................",
+        ],
+    ),
+    "emergency_bandage": (
+        {"O": "#4a4438", "W": "#f6f3ea", "G": "#cfc9b8", "S": "#e2dccb", "R": "#d8342c"},
+        [
+            "................",
+            "................",
+            "....OOOOOOOO....",
+            "...OWWWWWWWWO...",
+            "..OWWWWWWWWWWO..",
+            "..OWSSWRRWWWWO..",
+            "..OWSOSRRWWWWO..",
+            "..OWSSRRRRRRWO..",
+            "..OWWWRRRRRRWO..",
+            "..OWWWWWRRWWWO..",
+            "..OGWWWWRRWWWOOO",
+            "...OGGGGGGGGOWWO",
+            "....OOOOOOOOOGGO",
+            ".............OO.",
+            "................",
+            "................",
+        ],
+    ),
+    "aging_jar": (
+        {"O": "#24140a", "B": "#7a4a2a", "L": "#b07a4a", "D": "#4e2e18"},
+        [
+            "................",
+            ".....OOOOOO.....",
+            "....OLLLLLLO....",
+            "...OOOOOOOOOO...",
+            "....ODDDDDDO....",
+            "...OBBBBBBBBO...",
+            "..OBLBBBBBBBBO..",
+            ".OBLLBBBBBBBBBO.",
+            ".OBLBBBBBBBBBDO.",
+            ".OBLBBBBBBBBBDO.",
+            ".OBBBBBBBBBBDDO.",
+            ".OBBBBBBBBBBDDO.",
+            "..OBBBBBBBBDDO..",
+            "...OBBBBBBDDO...",
+            "....OOOOOOOO....",
+            "................",
+        ],
+    ),
+    # ---- 인챈트 북 5종 ----
+    "worn_enchant_book_tool": (WORN_BOOK, stamp(BOOK, [(5, 4, MARK_PICKAXE)] + WORN_SPOTS)),
+    "worn_enchant_book_rod": (WORN_BOOK, stamp(BOOK, [(5, 4, MARK_HOOK)] + WORN_SPOTS)),
+    "smith_enchant_book_tool": (smith_book("#2f4f9a", "#5a7fd0", "#1e3470"),
+                                stamp(BOOK, [(5, 4, MARK_PICKAXE)] + SMITH_STUDS)),
+    "smith_enchant_book_rod": (smith_book("#1f7a78", "#4fb8b0", "#125250"),
+                               stamp(BOOK, [(5, 4, MARK_HOOK)] + SMITH_STUDS)),
+    "mending_book": (smith_book("#2f8a4a", "#6fc88a", "#1c5a30"),
+                     stamp(BOOK, [(5, 4, MARK_CROSS)] + SMITH_STUDS)),
+    # ---- 공통 ----
+    "chest_lock": (
+        {"O": "#2a2010", "S": "#b8bec8", "Y": "#e8b830", "L": "#fff0a0", "D": "#a87a18"},
+        [
+            "................",
+            "................",
+            ".....OOOOOO.....",
+            "....OSSSSSSO....",
+            "...OSSOOOOSSO...",
+            "...OSO....OSO...",
+            "...OSO....OSO...",
+            "..OOOOOOOOOOOO..",
+            "..OYYYYYYYYYYO..",
+            "..OYLYYOOYYYDO..",
+            "..OYLYYOOYYYDO..",
+            "..OYYYYYOYYYDO..",
+            "..OYYYYYOYYDDO..",
+            "..OYDDDDDDDDDO..",
+            "..OOOOOOOOOOOO..",
+            "................",
+        ],
+    ),
+    "title_book": (
+        {"O": "#1e102e", "C": "#6a3fa8", "L": "#9a70d8", "D": "#45247a", "P": "#f2ead2", "M": "#ffd94a",
+         "R": "#d8342c"},
+        stamp(BOOK, [(5, 4, MARK_CROWN), (9, 12, ["R", "R", "R"])]),
+    ),
+})
+
+
 # 탐사 나침반: 바늘 방향 32장. 바닐라 나침반과 같은 순서다 (00 = 아래, 08 = 왼쪽, 16 = 위, 24 = 오른쪽).
 COMPASS_PALETTE = {"O": "#1a0f06", "B": "#c08a44", "C": "#7a4e22", "F": "#123c44", "T": "#2b8a99",
                    "R": "#ff4a4a", "W": "#e8fffb"}
