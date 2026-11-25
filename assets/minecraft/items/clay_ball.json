@@ -1,0 +1,19 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "cases": [
+      {
+        "when": "hanolter:relic_clay_seal",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/relic_clay_seal"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/clay_ball"
+    }
+  }
+}

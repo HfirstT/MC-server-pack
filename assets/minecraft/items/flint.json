@@ -1,0 +1,19 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "cases": [
+      {
+        "when": "hanolter:relic_stone_arrowhead",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/relic_stone_arrowhead"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/flint"
+    }
+  }
+}

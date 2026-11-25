@@ -1,0 +1,19 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "cases": [
+      {
+        "when": "hanolter:special_bait",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/special_bait"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/fermented_spider_eye"
+    }
+  }
+}
