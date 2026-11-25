@@ -1,0 +1,19 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "cases": [
+      {
+        "when": "hanolter:relic_pottery_shard",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/relic_pottery_shard"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/brick"
+    }
+  }
+}

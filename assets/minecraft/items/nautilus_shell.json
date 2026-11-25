@@ -1,0 +1,19 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "cases": [
+      {
+        "when": "hanolter:relic_shell_ornament",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/relic_shell_ornament"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/nautilus_shell"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "cases": [
+      {
+        "when": "hanolter:treasure_map_piece",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/treasure_map_piece"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/globe_banner_pattern"
+    }
+  }
+}

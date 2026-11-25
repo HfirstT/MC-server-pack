@@ -21,6 +21,7 @@ assets/
 CREDITS.md                               ← 그림마다 출처·라이선스
 tools/validate.py                        ← 리소스팩 검사
 tools/make_textures.py                   ← 직접 만든 도트 그림의 원본 (글자 격자)
+tools/vanilla_items/<바탕 아이템>.json   ← 단순 모델이 아닌 바탕의 바닐라 아이템 정의 (fallback 비교용)
 ```
 
 바닐라 그림·모델 자체는 바꾸지 않는다. `assets/minecraft/` 아래에는 `items/*.json`만 둔다.
@@ -40,6 +41,38 @@ tools/make_textures.py                   ← 직접 만든 도트 그림의 원�
 | 사금 덩이 | `hanolter:gold_grain` | `gold_nugget` |
 | 맑은 핵 | `hanolter:clear_core` | `ghast_tear` |
 | 초록 별조각 | `hanolter:green_shard` | `prismarine_shard` |
+| 토기 조각 | `hanolter:relic_pottery_shard` | `brick` |
+| 돌 화살촉 | `hanolter:relic_stone_arrowhead` | `flint` |
+| 옛 동전 | `hanolter:relic_old_coin` | `gold_nugget` |
+| 녹슨 열쇠 | `hanolter:relic_rusty_key` | `iron_nugget` |
+| 점토 인장 | `hanolter:relic_clay_seal` | `clay_ball` |
+| 화석 뼈 | `hanolter:relic_fossil_bone` | `bone` |
+| 조개 장신구 | `hanolter:relic_shell_ornament` | `nautilus_shell` |
+| 수정 조각 | `hanolter:relic_crystal_shard` | `amethyst_shard` |
+| 전설 유물 — 별의 눈물 | `hanolter:legend_star_tear` | `nether_star` |
+| 전설 유물 — 잠든 바다의 진주 | `hanolter:legend_deep_pearl` | `heart_of_the_sea` |
+| 전설 유물 — 잊힌 왕의 메아리 | `hanolter:legend_king_echo` | `echo_shard` |
+| 향신료 | `hanolter:spice` | `glowstone_dust` |
+| 야생 버섯 | `hanolter:wild_mushroom` | `brown_mushroom` |
+| 꿀 | `hanolter:honey` | `honey_bottle` |
+| 광맥 지도 | `hanolter:vein_map` | `map` |
+| 특수 미끼 | `hanolter:special_bait` | `fermented_spider_eye` |
+| 레시피 쪽지 | `hanolter:recipe_note` | `paper` |
+| 비전 레시피 (일반) | `hanolter:secret_recipe_normal` | `flower_banner_pattern` |
+| 비전 레시피 (희귀) | `hanolter:secret_recipe_rare` | `flower_banner_pattern` |
+| 비전 레시피 (전설) | `hanolter:secret_recipe_legend` | `flower_banner_pattern` |
+| 고대 도면 조각 | `hanolter:blueprint_piece` | `disc_fragment_5` |
+| 고대 도면 (일반) | `hanolter:blueprint_normal` | `paper` |
+| 고대 도면 (희귀) | `hanolter:blueprint_rare` | `paper` |
+| 고대 도면 (전설) | `hanolter:blueprint_legend` | `paper` |
+| 보물 지도 조각 | `hanolter:treasure_map_piece` | `globe_banner_pattern` |
+| 보물 지도 | `hanolter:treasure_map` | `filled_map` |
+| 지폐 1~9탁 (작은 동전) | `hanolter:money_coin_small` | `paper` |
+| 지폐 10~99탁 (큰 동전) | `hanolter:money_coin_large` | `paper` |
+| 지폐 100~999탁 (깔끔한 동전) | `hanolter:money_coin_fine` | `paper` |
+| 지폐 10,000~99,999탁 (수표) | `hanolter:money_check` | `paper` |
+| 지폐 100,000탁 이상 (돈 보따리) | `hanolter:money_bag` | `paper` |
+| 탐사 나침반 | `hanolter:explorer_compass` (그림 `explorer_compass_00`~`31`, 바늘 방향마다 한 장) | `compass` |
 
 ## 그림 추가 방법
 
@@ -70,7 +103,9 @@ tools/make_textures.py                   ← 직접 만든 도트 그림의 원�
    }
    ```
 
-   바닐라 아이템 정의가 단순 모델이 아닌 아이템(활·나침반·색이 입혀지는 아이템 등)은 `fallback`에 바닐라 정의 전체를 그대로 넣어야 한다. 그런 바탕은 PR에서 따로 확인한다.
+   바닐라 아이템 정의가 단순 모델이 아닌 아이템(활·나침반·색이 입혀지는 아이템 등)은 `fallback`에 바닐라 정의 전체를 그대로 넣어야 한다.
+   그 바닐라 정의(마인크래프트 26.3)를 `tools/vanilla_items/<바탕 아이템>.json`에 그대로 두면, 검사가 `fallback`이 그 파일과 똑같은지 확인한다 (지금은 `compass`).
+   탐사 나침반은 바닐라 나침반과 같은 구조(자석석 추적 여부 → 바늘 각도 32단계)에 그림만 `explorer_compass_00`~`31`로 바꿔 바늘이 그대로 움직인다.
 4. **`CREDITS.md`에 적기** — 파일 경로, 출처 URL, 작가, 라이선스(CC0 또는 직접 제작), 수정 내용.
 5. **검사** — `python3 tools/validate.py` (PR을 올리면 자동으로도 돈다).
 6. 플러그인(`MC-server`) 쪽 YAML의 `model` 키에 `hanolter:<이름>`을 적는다 (별도 PR).

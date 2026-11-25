@@ -9,6 +9,69 @@
           "type": "minecraft:model",
           "model": "hanolter:item/banknote"
         }
+      },
+      {
+        "when": "hanolter:recipe_note",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/recipe_note"
+        }
+      },
+      {
+        "when": "hanolter:blueprint_normal",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/blueprint_normal"
+        }
+      },
+      {
+        "when": "hanolter:blueprint_rare",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/blueprint_rare"
+        }
+      },
+      {
+        "when": "hanolter:blueprint_legend",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/blueprint_legend"
+        }
+      },
+      {
+        "when": "hanolter:money_coin_small",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/money_coin_small"
+        }
+      },
+      {
+        "when": "hanolter:money_coin_large",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/money_coin_large"
+        }
+      },
+      {
+        "when": "hanolter:money_coin_fine",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/money_coin_fine"
+        }
+      },
+      {
+        "when": "hanolter:money_check",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/money_check"
+        }
+      },
+      {
+        "when": "hanolter:money_bag",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/money_bag"
+        }
       }
     ],
     "fallback": {

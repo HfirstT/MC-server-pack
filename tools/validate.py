@@ -5,6 +5,7 @@
 - 모든 .json / pack.mcmeta 의 JSON 문법
 - assets/minecraft 아래에는 아이템 정의(items/*.json)만 있다 (바닐라 그림·모델 자체를 바꾸지 않는다)
 - 바닐라 아이템 정의: custom_model_data 문자열로 고르고, fallback 은 그 아이템의 원래 바닐라 모델
+  (단순 모델이 아닌 바탕은 tools/vanilla_items/<이름>.json 의 바닐라 정의와 똑같아야 한다)
 - 아이템 정의가 참조한 모델 파일, 모델이 참조한 그림 파일이 있다
 - 그림은 16x16 PNG 이고, 파일마다 CREDITS.md 에 적혀 있다
 """
@@ -16,6 +17,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 ASSETS = ROOT / "assets"
 NAMESPACE = "hanolter"
+# 바닐라 정의가 단순 모델이 아닌 바탕 아이템의 바닐라 아이템 정의(마인크래프트 26.3 그대로). fallback 비교용.
+VANILLA_ITEMS = ROOT / "tools" / "vanilla_items"
 errors = []
 
 
@@ -103,22 +106,35 @@ def check_vanilla_item(path):
             or model.get("property") not in ("minecraft:custom_model_data", "custom_model_data"):
         err(path, "바닐라 아이템 정의는 custom_model_data 로 고르는 minecraft:select 여야 한다")
         return
-    expected = f"minecraft:item/{path.stem}"
     fallback = model.get("fallback")
-    if not isinstance(fallback, dict) or fallback.get("type") not in ("minecraft:model", "model") \
-            or "minecraft:" + split(str(fallback.get("model")))[1] != expected \
-            or split(str(fallback.get("model")))[0] != "minecraft":
-        err(path, f"fallback 은 원래 바닐라 모델({expected})이어야 한다")
+    vanilla_path = VANILLA_ITEMS / path.name
+    if vanilla_path.is_file():
+        # 바닐라 정의가 단순 모델이 아닌 바탕(나침반 등): fallback 이 바닐라 정의와 완전히 같아야 한다.
+        vanilla = load(vanilla_path)
+        if not isinstance(vanilla, dict) or fallback != vanilla.get("model"):
+            err(path, f"fallback 은 바닐라 정의({vanilla_path.relative_to(ROOT)})와 똑같아야 한다")
+    else:
+        expected = f"minecraft:item/{path.stem}"
+        if not isinstance(fallback, dict) or fallback.get("type") not in ("minecraft:model", "model") \
+                or "minecraft:" + split(str(fallback.get("model")))[1] != expected \
+                or split(str(fallback.get("model")))[0] != "minecraft" \
+                or set(fallback) != {"type", "model"}:
+            err(path, f"fallback 은 원래 바닐라 모델({expected})이어야 한다")
     cases = model.get("cases")
     if not isinstance(cases, list) or not cases:
         err(path, "cases 가 비어 있다")
         return
+    seen = set()
     for case in cases:
         whens = case.get("when") if isinstance(case, dict) else None
         whens = whens if isinstance(whens, list) else [whens]
         for when in whens:
             if not isinstance(when, str) or not when.startswith(NAMESPACE + ":"):
                 err(path, f"when 값은 '{NAMESPACE}:이름' 문자열이어야 한다 (지금: {when!r})")
+            elif when in seen:
+                err(path, f"when 값 {when!r} 이 두 번 적혀 있다 (뒤의 것은 쓰이지 않는다)")
+            else:
+                seen.add(when)
     for ref in model_refs(model):
         check_model(ref, path)
 
