@@ -73,6 +73,31 @@ tools/vanilla_items/<바탕 아이템>.json   ← 단순 모델이 아닌 바탕
 | 지폐 10,000~99,999탁 (수표) | `hanolter:money_check` | `paper` |
 | 지폐 100,000탁 이상 (돈 보따리) | `hanolter:money_bag` | `paper` |
 | 탐사 나침반 | `hanolter:explorer_compass` (그림 `explorer_compass_00`~`31`, 바늘 방향마다 한 장) | `compass` |
+| 농사 도시락 | `hanolter:meal_harvest_box` | `cooked_beef` |
+| 어부의 국밥 | `hanolter:meal_fish_soup` | `mushroom_stew` |
+| 광부의 주먹밥 | `hanolter:meal_miner_rice` | `cooked_chicken` |
+| 호박 스튜 | `hanolter:meal_pumpkin_stew` | `pumpkin_pie` |
+| 참돔구이 정식 | `hanolter:meal_sea_bream_feast` | `cooked_salmon` |
+| 탐험 도시락 | `hanolter:meal_explorer_lunchbox` | `cookie` |
+| 꿀 고기찜 | `hanolter:meal_honey_pork_stew` | `cooked_porkchop` |
+| 향신료 생선구이 | `hanolter:meal_spice_grilled_fish` | `cooked_cod` |
+| 특별 음식 — 농부 (등급 3개 공통) | `hanolter:meal_special_farmer` | `golden_carrot` |
+| 특별 음식 — 어부 (등급 3개 공통) | `hanolter:meal_special_fisher` | `cooked_salmon` |
+| 특별 음식 — 광부 (등급 3개 공통) | `hanolter:meal_special_miner` | `cooked_mutton` |
+| 특별 음식 — 탐험가 (등급 3개 공통) | `hanolter:meal_special_explorer` | `cooked_rabbit` |
+| 비상 음식 — 농사 도시락 | `hanolter:meal_emergency_harvest_box` | `bread` |
+| 비상 음식 — 어부의 국밥 | `hanolter:meal_emergency_fish_soup` | `cod` |
+| 비상 음식 — 광부의 주먹밥 | `hanolter:meal_emergency_miner_rice` | `baked_potato` |
+| 정체불명의 죽 | `hanolter:mystery_porridge` | `mushroom_stew` |
+| 응급 붕대 | `hanolter:emergency_bandage` | `paper` |
+| 숙성 항아리 (아이템만) | `hanolter:aging_jar` | `barrel` |
+| 낡은 인챈트 북 (도구용) | `hanolter:worn_enchant_book_tool` | `book` |
+| 낡은 인챈트 북 (낚싯대용) | `hanolter:worn_enchant_book_rod` | `book` |
+| 대장장이 인챈트 북 (도구용) | `hanolter:smith_enchant_book_tool` | `book` |
+| 대장장이 인챈트 북 (낚싯대용) | `hanolter:smith_enchant_book_rod` | `book` |
+| 수선 북 | `hanolter:mending_book` | `book` |
+| 자물쇠 | `hanolter:chest_lock` | `tripwire_hook` |
+| 칭호북 | `hanolter:title_book` | `written_book` |
 
 ## 그림 추가 방법
 
@@ -104,7 +129,7 @@ tools/vanilla_items/<바탕 아이템>.json   ← 단순 모델이 아닌 바탕
    ```
 
    바닐라 아이템 정의가 단순 모델이 아닌 아이템(활·나침반·색이 입혀지는 아이템 등)은 `fallback`에 바닐라 정의 전체를 그대로 넣어야 한다.
-   그 바닐라 정의(마인크래프트 26.3)를 `tools/vanilla_items/<바탕 아이템>.json`에 그대로 두면, 검사가 `fallback`이 그 파일과 똑같은지 확인한다 (지금은 `compass`).
+   그 바닐라 정의(마인크래프트 26.3)를 `tools/vanilla_items/<바탕 아이템>.json`에 그대로 두면, 검사가 `fallback`이 그 파일과 똑같은지 확인한다 (지금은 `compass`, 그리고 바닐라 모델이 `minecraft:block/barrel`인 `barrel`).
    탐사 나침반은 바닐라 나침반과 같은 구조(자석석 추적 여부 → 바늘 각도 32단계)에 그림만 `explorer_compass_00`~`31`로 바꿔 바늘이 그대로 움직인다.
 4. **`CREDITS.md`에 적기** — 파일 경로, 출처 URL, 작가, 라이선스(CC0 또는 직접 제작), 수정 내용.
 5. **검사** — `python3 tools/validate.py` (PR을 올리면 자동으로도 돈다).

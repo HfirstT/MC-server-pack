@@ -1,0 +1,47 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "cases": [
+      {
+        "when": "hanolter:worn_enchant_book_tool",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/worn_enchant_book_tool"
+        }
+      },
+      {
+        "when": "hanolter:worn_enchant_book_rod",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/worn_enchant_book_rod"
+        }
+      },
+      {
+        "when": "hanolter:smith_enchant_book_tool",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/smith_enchant_book_tool"
+        }
+      },
+      {
+        "when": "hanolter:smith_enchant_book_rod",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/smith_enchant_book_rod"
+        }
+      },
+      {
+        "when": "hanolter:mending_book",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/mending_book"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/book"
+    }
+  }
+}

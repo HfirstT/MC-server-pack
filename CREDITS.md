@@ -83,3 +83,28 @@
 | `assets/hanolter/textures/item/explorer_compass_29.png` | 탐사 나침반 (바늘 방향 29) | 직접 그림 — `tools/make_textures.py`의 글자 격자 + 바늘 그리기(`compass_frames`) | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
 | `assets/hanolter/textures/item/explorer_compass_30.png` | 탐사 나침반 (바늘 방향 30) | 직접 그림 — `tools/make_textures.py`의 글자 격자 + 바늘 그리기(`compass_frames`) | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
 | `assets/hanolter/textures/item/explorer_compass_31.png` | 탐사 나침반 (바늘 방향 31) | 직접 그림 — `tools/make_textures.py`의 글자 격자 + 바늘 그리기(`compass_frames`) | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
+| `assets/hanolter/textures/item/meal_harvest_box.png` | 농사 도시락 | 직접 그림 — `tools/make_textures.py`의 글자 격자 | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
+| `assets/hanolter/textures/item/meal_fish_soup.png` | 어부의 국밥 | 직접 그림 — `tools/make_textures.py`의 글자 격자 | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
+| `assets/hanolter/textures/item/meal_miner_rice.png` | 광부의 주먹밥 | 직접 그림 — `tools/make_textures.py`의 글자 격자 | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
+| `assets/hanolter/textures/item/meal_pumpkin_stew.png` | 호박 스튜 | 직접 그림 — `tools/make_textures.py`의 글자 격자 | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
+| `assets/hanolter/textures/item/meal_sea_bream_feast.png` | 참돔구이 정식 | 직접 그림 — `tools/make_textures.py`의 글자 격자 | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
+| `assets/hanolter/textures/item/meal_explorer_lunchbox.png` | 탐험 도시락 | 직접 그림 — `tools/make_textures.py`의 글자 격자 | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
+| `assets/hanolter/textures/item/meal_honey_pork_stew.png` | 꿀 고기찜 | 직접 그림 — `tools/make_textures.py`의 글자 격자 | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
+| `assets/hanolter/textures/item/meal_spice_grilled_fish.png` | 향신료 생선구이 | 직접 그림 — `tools/make_textures.py`의 글자 격자 | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
+| `assets/hanolter/textures/item/meal_special_farmer.png` | 특별 음식 — 농부 (등급 3개 공통) | 직접 그림 — `tools/make_textures.py`의 글자 격자 | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
+| `assets/hanolter/textures/item/meal_special_fisher.png` | 특별 음식 — 어부 (등급 3개 공통) | 직접 그림 — `tools/make_textures.py`의 글자 격자 | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
+| `assets/hanolter/textures/item/meal_special_miner.png` | 특별 음식 — 광부 (등급 3개 공통) | 직접 그림 — `tools/make_textures.py`의 글자 격자 | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
+| `assets/hanolter/textures/item/meal_special_explorer.png` | 특별 음식 — 탐험가 (등급 3개 공통) | 직접 그림 — `tools/make_textures.py`의 글자 격자 | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
+| `assets/hanolter/textures/item/meal_emergency_harvest_box.png` | 비상 음식 — 농사 도시락 | 직접 그림 — `tools/make_textures.py`의 글자 격자 (같은 요리 격자를 `faded`로 흐리게) | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
+| `assets/hanolter/textures/item/meal_emergency_fish_soup.png` | 비상 음식 — 어부의 국밥 | 직접 그림 — `tools/make_textures.py`의 글자 격자 (같은 요리 격자를 `faded`로 흐리게) | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
+| `assets/hanolter/textures/item/meal_emergency_miner_rice.png` | 비상 음식 — 광부의 주먹밥 | 직접 그림 — `tools/make_textures.py`의 글자 격자 (같은 요리 격자를 `faded`로 흐리게) | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
+| `assets/hanolter/textures/item/mystery_porridge.png` | 정체불명의 죽 | 직접 그림 — `tools/make_textures.py`의 글자 격자 | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
+| `assets/hanolter/textures/item/emergency_bandage.png` | 응급 붕대 | 직접 그림 — `tools/make_textures.py`의 글자 격자 | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
+| `assets/hanolter/textures/item/aging_jar.png` | 숙성 항아리 (아이템만) | 직접 그림 — `tools/make_textures.py`의 글자 격자 | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
+| `assets/hanolter/textures/item/worn_enchant_book_tool.png` | 낡은 인챈트 북 (도구용) | 직접 그림 — `tools/make_textures.py`의 글자 격자 | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
+| `assets/hanolter/textures/item/worn_enchant_book_rod.png` | 낡은 인챈트 북 (낚싯대용) | 직접 그림 — `tools/make_textures.py`의 글자 격자 | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
+| `assets/hanolter/textures/item/smith_enchant_book_tool.png` | 대장장이 인챈트 북 (도구용) | 직접 그림 — `tools/make_textures.py`의 글자 격자 | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
+| `assets/hanolter/textures/item/smith_enchant_book_rod.png` | 대장장이 인챈트 북 (낚싯대용) | 직접 그림 — `tools/make_textures.py`의 글자 격자 | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
+| `assets/hanolter/textures/item/mending_book.png` | 수선 북 | 직접 그림 — `tools/make_textures.py`의 글자 격자 | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
+| `assets/hanolter/textures/item/chest_lock.png` | 자물쇠 | 직접 그림 — `tools/make_textures.py`의 글자 격자 | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |
+| `assets/hanolter/textures/item/title_book.png` | 칭호북 | 직접 그림 — `tools/make_textures.py`의 글자 격자 | HfirstT/mc-server-pack 기여자 | 직접 제작 | 없음 (원본) |

@@ -72,6 +72,13 @@
           "type": "minecraft:model",
           "model": "hanolter:item/money_bag"
         }
+      },
+      {
+        "when": "hanolter:emergency_bandage",
+        "model": {
+          "type": "minecraft:model",
+          "model": "hanolter:item/emergency_bandage"
+        }
       }
     ],
     "fallback": {

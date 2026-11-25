@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "hanolter:item/meal_honey_pork_stew"
+  }
+}
